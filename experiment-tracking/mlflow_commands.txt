@@ -1,1 +1,14 @@
+Experiment tracking is the process of keepig track of all relevant info of an ML experiment:
+- source code
+- environment
+- data
+- model
+- metrics
+- ...
+
+Experiment tracking is important for:
+- reproducibility
+- organization
+- optimization
+
 mlflow ui --backend-store-uri sqlite:///mlflow.db
