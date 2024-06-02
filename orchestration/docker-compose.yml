@@ -23,7 +23,7 @@ services:
       - ~/Documents/secrets/personal-gcp.json:/home/src/personal-gcp.json
     restart: on-failure:5
   postgres:
-    image: postgres:14
+    image: postgres:latest
     restart: on-failure
     container_name: ${PROJECT_NAME}-postgres
     env_file:
@@ -34,3 +34,14 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - ${POSTGRES_PORT_LOCAL}:${POSTGRES_PORT_CONTAINER}
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: on-failure
+    container_name: ${PROJECT_NAME}-pgadmin
+    env_file:
+      - .env
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - ${PGADMIN_PORT_LOCAL}:${PGADMIN_PORT_CONTAINER}
