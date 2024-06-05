@@ -1,8 +1,5 @@
-import pandas as pd
-
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
 
 if 'transformer' not in globals():
     from mage_ai.data_preparation.decorators import transformer
@@ -26,6 +23,7 @@ def transform(data, *args, **kwargs):
         Anything (e.g. data frame, dictionary, array, int, str, etc.)
     """
     categorical = ['PULocationID', 'DOLocationID']
+
     train_dicts = data[categorical].to_dict(orient='records')
 
     dv = DictVectorizer()
@@ -36,6 +34,7 @@ def transform(data, *args, **kwargs):
 
     lr = LinearRegression()
     lr.fit(X_train, y_train)
+
 
     return {'model': lr, 'vectorizer': dv}
 

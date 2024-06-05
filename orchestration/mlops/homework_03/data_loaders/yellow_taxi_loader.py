@@ -13,7 +13,6 @@ def load_data_from_api(*args, **kwargs):
     Template for loading data from API
     """
     url = 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-03.parquet'
-
     return pd.read_parquet(url)
 
 
