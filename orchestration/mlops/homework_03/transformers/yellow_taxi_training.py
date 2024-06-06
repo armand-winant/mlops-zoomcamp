@@ -1,6 +1,5 @@
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.linear_model import LinearRegression
-import pickle
 
 if 'transformer' not in globals():
     from mage_ai.data_preparation.decorators import transformer
