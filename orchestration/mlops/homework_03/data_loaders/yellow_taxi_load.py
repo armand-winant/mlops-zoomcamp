@@ -1,6 +1,5 @@
-import io
 import pandas as pd
-import requests
+
 if 'data_loader' not in globals():
     from mage_ai.data_preparation.decorators import data_loader
 if 'test' not in globals():
@@ -8,11 +7,15 @@ if 'test' not in globals():
 
 
 @data_loader
-def load_data_from_api(*args, **kwargs):
+def load_data(*args, **kwargs):
     """
-    Template for loading data from API
+    Template code for loading data from any source.
+
+    Returns:
+        Anything (e.g. data frame, dictionary, array, int, str, etc.)
     """
     url = 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-03.parquet'
+
     return pd.read_parquet(url)
 
 

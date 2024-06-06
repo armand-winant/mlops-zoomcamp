@@ -1,5 +1,6 @@
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.linear_model import LinearRegression
+import pickle
 
 if 'transformer' not in globals():
     from mage_ai.data_preparation.decorators import transformer
@@ -22,21 +23,23 @@ def transform(data, *args, **kwargs):
     Returns:
         Anything (e.g. data frame, dictionary, array, int, str, etc.)
     """
+    # create vectorizer for transforming inputs
+    dv = DictVectorizer()
+
+    # define independent and target variables
     categorical = ['PULocationID', 'DOLocationID']
+    target = 'duration'
 
     train_dicts = data[categorical].to_dict(orient='records')
 
-    dv = DictVectorizer()
     X_train = dv.fit_transform(train_dicts)
-
-    target = 'duration'
     y_train = data[target].values
 
-    lr = LinearRegression()
-    lr.fit(X_train, y_train)
+    # train model
+    model = LinearRegression()
+    model.fit(X_train, y_train)
 
-
-    return {'model': lr, 'vectorizer': dv}
+    return { 'vectorizer': dv, 'model': model }
 
 
 @test
