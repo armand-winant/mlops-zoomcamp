@@ -18,6 +18,9 @@ def predict(features):
 
   return preds[0]
 
+app = Flask('duration-prediction')
+
+@app.route('/predict', methods=['POST'])
 def predict_endpoint():
   ride = request.get_json()
 
@@ -29,3 +32,6 @@ def predict_endpoint():
   }
 
   return jsonify(result)
+
+if __name__ == '__main__':
+  app.run(debug=True, host='0.0.0.0', port=9696)
