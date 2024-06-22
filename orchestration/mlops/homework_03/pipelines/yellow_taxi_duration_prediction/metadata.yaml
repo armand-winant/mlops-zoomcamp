@@ -40,7 +40,7 @@ blocks:
   upstream_blocks:
   - load_yellow_taxi
   uuid: prepare_yellow_taxi
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration:
     file_source:
@@ -53,13 +53,13 @@ blocks:
   language: python
   name: train_yellow_taxi
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: transformer
   upstream_blocks:
   - prepare_yellow_taxi
   uuid: train_yellow_taxi
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration:
     file_source:

@@ -1,6 +1,7 @@
 import pandas as pd
-from sklearn.feature_extraction import DictVectorizer
 from sklearn.linear_model import LinearRegression
+from mlops.utils.data_preparation.encoders import vectorize_features
+from mlops.utils.models.sklearn import train_model
 
 
 if 'transformer' not in globals():
@@ -24,18 +25,13 @@ def transform(data, *args, **kwargs):
     Returns:
         Anything (e.g. data frame, dictionary, array, int, str, etc.)
     """
-    # dataframe to dictionaries
-    categorical = ['PULocationID', 'DOLocationID']
-    data_dicts = data[categorical].to_dict(orient='records')
-
     # transform variables for the model
-    dv = DictVectorizer()
-    X = dv.fit_transform(data_dicts)
+    categorical = ['PULocationID', 'DOLocationID']
+    X, _, dv = vectorize_features(data[categorical])
     y = data.duration.values
 
     # train regression model
-    model = LinearRegression()
-    model.fit(X, y)
+    model, _, _ = train_model(LinearRegression(), X, y)
 
     return {'model': model, 'vectorizer': dv}
 
