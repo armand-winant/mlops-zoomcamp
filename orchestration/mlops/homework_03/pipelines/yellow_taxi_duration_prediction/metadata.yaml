@@ -40,7 +40,7 @@ blocks:
   upstream_blocks:
   - load_yellow_taxi
   uuid: prepare_yellow_taxi
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration:
     file_source:
@@ -59,7 +59,7 @@ blocks:
   upstream_blocks:
   - prepare_yellow_taxi
   uuid: train_yellow_taxi
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration:
     file_source:
