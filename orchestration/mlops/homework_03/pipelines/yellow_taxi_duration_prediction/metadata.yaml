@@ -53,7 +53,7 @@ blocks:
   language: python
   name: train_yellow_taxi
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: transformer
   upstream_blocks:

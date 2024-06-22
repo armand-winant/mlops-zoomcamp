@@ -1,9 +1,8 @@
-import mlflow
-from sklearn.feature_extraction import DictVectorizer
+from utils.logging import track_experiment
 import pickle
 
-mlflow.set_tracking_uri("http://mlflow:5000")
-mlflow.set_experiment("yellow-taxi-duration-prediction")
+# mlflow.set_tracking_uri("http://mlflow:5000")
+# mlflow.set_experiment("yellow-taxi-duration-prediction")
 
 if 'data_exporter' not in globals():
     from mage_ai.data_preparation.decorators import data_exporter
@@ -24,11 +23,18 @@ def export_data(data, *args, **kwargs):
     """
     model = data['model']
     dv = data['vectorizer']
+    
+    track_experiment(
+        experiment_name="yellow-taxi-duration-prediction",
+        tracking_uri="http://mlflow:5000",
+        developer="Armand Winant",
+        model=model
+    )
 
-    # store the vectorizer object locally
-    with open("preprocessor.p", "wb") as f_out:
-        pickle.dump(dv, f_out)
+    # # store the vectorizer object locally
+    # with open("preprocessor.p", "wb") as f_out:
+    #     pickle.dump(dv, f_out)
 
-    with mlflow.start_run():
-        mlflow.log_artifact("preprocessor.p", artifact_path="preprocessor")
-        mlflow.sklearn.log_model(model, artifact_path="models_mlflow")
+    # with mlflow.start_run():
+    #     mlflow.log_artifact("preprocessor.p", artifact_path="preprocessor")
+    #     mlflow.sklearn.log_model(model, artifact_path="models_mlflow")
