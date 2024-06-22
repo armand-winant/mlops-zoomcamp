@@ -160,8 +160,5 @@ def track_experiment(
             log_model(model, **opts)
             if verbosity:
                 print(f'Logged model {model.__class__.__name__}.')
-    
-    # Update run and fetch info
-    client.update_run(run_id, status="FINISHED")
 
     return run
