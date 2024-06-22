@@ -24,12 +24,11 @@ def export_data(data, *args, **kwargs):
     model = data['model']
     dv = data['vectorizer']
     
-    track_experiment(
+    run = track_experiment(
         experiment_name="yellow-taxi-duration-prediction",
         tracking_uri="http://mlflow:5000",
         developer="Armand Winant",
-        model=model
-    )
+        model=model)
 
     # # store the vectorizer object locally
     # with open("preprocessor.p", "wb") as f_out:
